@@ -1,0 +1,7 @@
+{
+  "url": "https://github.com/YarilaFox/wgpu.git",
+  "revision": "77049cfcccc3994b37c879ac2d1772064dfa3eb9",
+  "upstream": "40f4a34ebaf56f9a046231f54125ad046239d3f3",
+  "version": "30.0.1",
+  "packages": ["wgpu-hal", "wgpu-types", "wgpu-naga-bridge", "naga", "naga-types"]
+}

@@ -1,0 +1,53 @@
+name: DX12 visual regression
+
+on:
+  push:
+    branches: [upstream/v30.0.1]
+    paths: ['wgpu-hal/**', 'scripts/wgpu-hal-visual/**', '.github/workflows/dx12-visual.yml']
+  pull_request:
+    branches: [upstream/v30.0.1]
+    paths: ['scripts/wgpu-hal-visual/**', '.github/workflows/dx12-visual.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  windows:
+    name: Windows DX12 pixel comparison
+    runs-on: windows-latest
+    timeout-minutes: 30
+    env:
+      RUSTUP_TOOLCHAIN: stable
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: dtolnay/rust-toolchain@b725eda525362e7cf34af9a7243cac1e3f01a7ec # stable
+        with:
+          toolchain: stable
+          components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2.9.3
+        with:
+          workspaces: scripts/wgpu-hal-visual -> target
+          key: dx12-pinned-fork
+      - name: Check harness formatting
+        run: cargo fmt --manifest-path scripts/wgpu-hal-visual/Cargo.toml -- --check
+      - name: Test regression verdicts
+        run: cargo test --manifest-path scripts/wgpu-hal-visual/Cargo.toml --locked
+      - name: Lint the harness
+        run: cargo clippy --manifest-path scripts/wgpu-hal-visual/Cargo.toml --all-targets --locked -- -D warnings
+      - name: Capture and compare DX12 windows
+        shell: pwsh
+        run: ./scripts/wgpu-hal-visual/run.ps1 -OutputDirectory "$env:RUNNER_TEMP/dx12-visual-results" -TargetDirectory "$env:GITHUB_WORKSPACE/scripts/wgpu-hal-visual/target"
+      - name: Upload screenshots and numerical verdict
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: dx12-window-captures
+          retention-days: 14
+          path: |
+            ${{ runner.temp }}/dx12-visual-results/**/*.png
+            ${{ runner.temp }}/dx12-visual-results/**/*.json
+            ${{ runner.temp }}/dx12-visual-results/RESULTS.md
+            ${{ runner.temp }}/dx12-visual-results/*.log
+          if-no-files-found: warn
