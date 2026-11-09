@@ -42,6 +42,12 @@ Bottom level categories:
 
 ## Unreleased
 
+### Bug Fixes
+
+#### DX12
+
+- Fix blurry rendering in restored Windows windows by avoiding swap-chain stretching for HWND presentation. By @YarilaFox in [#1](https://github.com/storytold/wgpu/pull/1).
+
 ## v30.0.1 (2026-08-21)
 
 ### Bug Fixes
