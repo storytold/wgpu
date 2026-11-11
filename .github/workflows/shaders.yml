@@ -38,7 +38,7 @@ jobs:
             debug = "line-tables-only"
           EOF
 
-      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2.9.3
+      - uses: step-security/rust-cache@8871c8ba063416da7c32246932ea6ae08700453e # v2.9.2
         with:
           env-vars: ImageVersion
           save-if: ${{ github.ref == 'refs/heads/trunk' }}
@@ -92,7 +92,7 @@ jobs:
             debug = "line-tables-only"
           EOF
 
-      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2.9.3
+      - uses: step-security/rust-cache@8871c8ba063416da7c32246932ea6ae08700453e # v2.9.2
         with:
           env-vars: ImageVersion
           save-if: ${{ github.ref == 'refs/heads/trunk' }}
@@ -135,7 +135,7 @@ jobs:
             debug = "line-tables-only"
           EOF
 
-      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2.9.3
+      - uses: step-security/rust-cache@8871c8ba063416da7c32246932ea6ae08700453e # v2.9.2
         with:
           env-vars: ImageVersion
           save-if: ${{ github.ref == 'refs/heads/trunk' }}
