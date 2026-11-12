@@ -88,11 +88,11 @@ jobs:
 
     steps:
       - name: Harden runner
-        uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
+        uses: step-security/harden-runner@v2.22.4
         with:
           egress-policy: audit
       - name: checkout repo
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -103,12 +103,12 @@ jobs:
           cargo -V
 
       - name: Install `cargo-llvm-cov`
-        uses: step-security/taiki-e-install-action@76747d22a7567cc4438546a84f11bdf18e670ab8 # v2.87.32
+        uses: step-security/taiki-e-install-action@v2.87.32
         with:
           tool: cargo-llvm-cov
 
       - name: caching
-        uses: step-security/rust-cache@8871c8ba063416da7c32246932ea6ae08700453e # v2.9.2
+        uses: step-security/rust-cache@v2.9.2
         with:
           # The version number can be incremented for cache busting.
           prefix-key: v3-rust-${{ hashFiles('cts_runner/revision.txt') }}
@@ -185,7 +185,7 @@ jobs:
           cargo --locked llvm-cov report --lcov --output-path lcov.info
 
       - name: Upload coverage report to Codecov
-        uses: step-security/codecov-action@367bf7e789f1b8e452a759be81c791de8d69b2f6 # v7.1.1
+        uses: step-security/codecov-action@v7.1.1
         if: steps.coverage.outcome == 'success'
         with:
           files: lcov.info

@@ -21,10 +21,10 @@ jobs:
     permissions: {}
     steps:
       - name: Harden runner
-        uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
+        uses: step-security/harden-runner@v2.22.4
         with:
           egress-policy: audit
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -38,7 +38,7 @@ jobs:
             debug = "line-tables-only"
           EOF
 
-      - uses: step-security/rust-cache@8871c8ba063416da7c32246932ea6ae08700453e # v2.9.2
+      - uses: step-security/rust-cache@v2.9.2
         with:
           env-vars: ImageVersion
           save-if: ${{ github.ref == 'refs/heads/trunk' }}
@@ -75,10 +75,10 @@ jobs:
     permissions: {}
     steps:
       - name: Harden runner
-        uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
+        uses: step-security/harden-runner@v2.22.4
         with:
           egress-policy: audit
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -92,7 +92,7 @@ jobs:
             debug = "line-tables-only"
           EOF
 
-      - uses: step-security/rust-cache@8871c8ba063416da7c32246932ea6ae08700453e # v2.9.2
+      - uses: step-security/rust-cache@v2.9.2
         with:
           env-vars: ImageVersion
           save-if: ${{ github.ref == 'refs/heads/trunk' }}
@@ -112,10 +112,10 @@ jobs:
     permissions: {}
     steps:
       - name: Harden runner
-        uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
+        uses: step-security/harden-runner@v2.22.4
         with:
           egress-policy: audit
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -135,7 +135,7 @@ jobs:
             debug = "line-tables-only"
           EOF
 
-      - uses: step-security/rust-cache@8871c8ba063416da7c32246932ea6ae08700453e # v2.9.2
+      - uses: step-security/rust-cache@v2.9.2
         with:
           env-vars: ImageVersion
           save-if: ${{ github.ref == 'refs/heads/trunk' }}
